@@ -1,5 +1,10 @@
-from django.urls import path
+from django.urls import include, path
+from rest_framework.routers import DefaultRouter
 
-from . import views
+from .views import PortfolioViewSet
 
-urlpatterns = [path("", views.index, name="index")]
+router = DefaultRouter()
+router.register(r"portfolios", PortfolioViewSet, basename="portfolio")
+
+
+urlpatterns = [path("", include(router.urls))]
